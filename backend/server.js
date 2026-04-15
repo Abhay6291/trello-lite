@@ -8,28 +8,29 @@ connectDB();
 
 const app = express();
 
-// ✅ PRODUCTION CORS
+// ✅ CORS FIX
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // local dev
-      "https://trello-lite-beta.vercel.app", // your live frontend
+      "http://localhost:5173",
+      "https://trello-lite-eta.vercel.app",
     ],
     credentials: true,
   })
 );
 
+app.options("*", cors()); // 🔥 FIX PREFLIGHT
+
 app.use(express.json());
 
-// ✅ Health check
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
-// ROUTES
+// Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/boards", require("./routes/boardRoutes"));
 app.use("/api/tasks", require("./routes/taskRoutes"));
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
 const PORT = process.env.PORT || 5000;
 
