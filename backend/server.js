@@ -8,15 +8,25 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// ✅ PRODUCTION CORS
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // local dev
+      "https://trello-lite-beta.vercel.app", // your live frontend
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
-// Test route
+// ✅ Health check
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// Routes
+// ROUTES
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/boards", require("./routes/boardRoutes"));
 app.use("/api/tasks", require("./routes/taskRoutes"));
