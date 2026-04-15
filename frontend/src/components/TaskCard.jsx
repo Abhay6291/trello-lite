@@ -32,7 +32,9 @@ export default function TaskCard({ task, refresh }) {
         ref={drag}
         onClick={() => setOpen(true)}
         className={`bg-white/10 border border-white/10 p-3 rounded-xl shadow-md cursor-grab transition-all duration-200 hover:scale-[1.03] ${
-          isDragging ? "opacity-40 rotate-2" : ""
+          isDragging
+            ? "opacity-100 rotate-2 scale-105 shadow-xl z-50"
+            : "opacity-90"
         }`}
       >
         <h3 className="font-semibold">{task.title}</h3>
@@ -54,3 +56,4 @@ export default function TaskCard({ task, refresh }) {
     </>
   );
 }
+
