@@ -5,10 +5,12 @@ import { AuthContext } from "../context/AuthContext";
 import { ThemeContext } from "../context/ThemeContext";
 import toast from "react-hot-toast";
 import DotGrid from "../components/DotGrid";
-import Logo from "../components/Logo"; // ✅ import
+import Logo from "../components/Logo";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false); // 👁️ state
+
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { dark, toggleTheme } = useContext(ThemeContext);
@@ -38,7 +40,7 @@ export default function Login() {
         {/* 🔥 NAVBAR */}
         <div className="flex justify-between items-center px-10 py-5">
 
-          {/* LEFT: LOGO + TEXT */}
+          {/* LEFT */}
           <div
             onClick={() => navigate("/")}
             className="flex items-center gap-2 cursor-pointer group"
@@ -55,7 +57,6 @@ export default function Login() {
           {/* RIGHT */}
           <div className="flex gap-3 items-center">
 
-            {/* 🌙 THEME */}
             <button
               onClick={toggleTheme}
               className={`border px-3 py-2 rounded-lg transition ${
@@ -67,7 +68,6 @@ export default function Login() {
               {dark ? "☀️" : "🌙"}
             </button>
 
-            {/* REGISTER */}
             <button
               onClick={() => navigate("/register")}
               className={`px-4 py-2 rounded-lg transition ${
@@ -104,6 +104,7 @@ export default function Login() {
                 : "bg-black/5 border border-black/10"
             }`}
           >
+            {/* EMAIL */}
             <input
               placeholder="Email"
               className={`w-full p-3 mb-3 rounded border outline-none ${
@@ -116,19 +117,32 @@ export default function Login() {
               }
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              className={`w-full p-3 mb-4 rounded border outline-none ${
-                dark
-                  ? "bg-white/10 border-white/10 focus:border-white/40"
-                  : "bg-black/5 border-black/10 focus:border-black/40"
-              }`}
-              onChange={(e) =>
-                setForm({ ...form, password: e.target.value })
-              }
-            />
+            {/* PASSWORD + 👁️ */}
+            <div className="relative mb-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className={`w-full p-3 pr-10 rounded border outline-none ${
+                  dark
+                    ? "bg-white/10 border-white/10 focus:border-white/40"
+                    : "bg-black/5 border-black/10 focus:border-black/40"
+                }`}
+                onChange={(e) =>
+                  setForm({ ...form, password: e.target.value })
+                }
+              />
 
+              {/* 👁️ Toggle */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm opacity-60 hover:opacity-100 transition"
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
+
+            {/* BUTTON */}
             <button
               className={`w-full py-3 rounded-lg font-semibold transition ${
                 dark
@@ -144,4 +158,3 @@ export default function Login() {
     </div>
   );
 }
-
