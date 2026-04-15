@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grab:active {
+  cursor: grabbing;
+}
+
+/* 🧊 FLOATING IDLE */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* ⚡ BAR MICRO ANIMATION */
+@keyframes barMove1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+@keyframes barMove2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes barMove3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(1px); }
+}
+
+.animate-bar1 {
+  animation: barMove1 2s ease-in-out infinite;
+}
+.animate-bar2 {
+  animation: barMove2 2.5s ease-in-out infinite;
+}
+.animate-bar3 {
+  animation: barMove3 2.2s ease-in-out infinite;
+}
+
+/* 🌈 LIGHT SWEEP */
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.animate-sweep {
+  animation: sweep 1.2s ease forwards;
+}
